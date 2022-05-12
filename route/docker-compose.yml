@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  route-mongo:
+    image: mongo
+    container_name: route-mongo
+    restart: always
+    privileged: true
+    ports:
+      - 47017:27017
+    command: mongos -f /data/configdb/mongos.conf
+    networks:
+     default:
+       ipv4_address: 192.168.0.10
+    volumes:
+      - ./main/conf/mongos.conf:/data/configdb/mongos.conf
+      - ./main/conf/mongo.keyfile:/data/configdb/mongo.keyfile
+networks:
+  default:
+    name: net
+    external: true

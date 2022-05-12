@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  shard1-mongo:
+    image: mongo
+    container_name: shard1-mongo
+    restart: always
+    privileged: true
+    ports:
+      - 36382:27017
+    command: -f /data/configdb/mongod.conf
+    networks:
+     default:
+       ipv4_address: 192.168.0.4
+    volumes:
+      - ./main/conf/mongod.conf:/data/configdb/mongod.conf
+      - ./main/conf/mongo.keyfile:/data/configdb/mongo.keyfile
+      - ./main/data/db:/data/db
+
+  shard1-mongo-rep:
+    image: mongo
+    container_name: shard1-mongo-rep
+    restart: always
+    privileged: true
+    ports:
+      - 36383:27017
+    command: -f /data/configdb/mongod.conf
+    networks:
+     default:
+       ipv4_address: 192.168.0.5
+    volumes:
+      - ./rep/conf/mongod.conf:/data/configdb/mongod.conf
+      - ./rep/conf/mongo.keyfile:/data/configdb/mongo.keyfile
+      - ./rep/data/db:/data/db
+
+  shard1-mongo-rep1:
+    image: mongo
+    container_name: shard1-mongo-rep1
+    restart: always
+    privileged: true
+    ports:
+      - 36384:27017
+    command: -f /data/configdb/mongod.conf
+    networks:
+     default:
+       ipv4_address: 192.168.0.6
+    volumes:
+      - ./rep1/conf/mongod.conf:/data/configdb/mongod.conf
+      - ./rep1/conf/mongo.keyfile:/data/configdb/mongo.keyfile
+      - ./rep1/data/db:/data/db
+networks:
+  default:
+    name: net
+    external: true
