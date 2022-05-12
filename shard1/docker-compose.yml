@@ -10,7 +10,7 @@ services:
     command: -f /data/configdb/mongod.conf
     networks:
      default:
-       ipv4_address: 192.168.0.4
+       ipv4_address: 192.168.0.103
     volumes:
       - ./main/conf/mongod.conf:/data/configdb/mongod.conf
       - ./main/conf/mongo.keyfile:/data/configdb/mongo.keyfile
@@ -26,7 +26,7 @@ services:
     command: -f /data/configdb/mongod.conf
     networks:
      default:
-       ipv4_address: 192.168.0.5
+       ipv4_address: 192.168.0.104
     volumes:
       - ./rep/conf/mongod.conf:/data/configdb/mongod.conf
       - ./rep/conf/mongo.keyfile:/data/configdb/mongo.keyfile
@@ -42,7 +42,7 @@ services:
     command: -f /data/configdb/mongod.conf
     networks:
      default:
-       ipv4_address: 192.168.0.6
+       ipv4_address: 192.168.0.105
     volumes:
       - ./rep1/conf/mongod.conf:/data/configdb/mongod.conf
       - ./rep1/conf/mongo.keyfile:/data/configdb/mongo.keyfile
