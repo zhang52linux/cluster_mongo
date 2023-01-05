@@ -5,15 +5,10 @@ services:
     container_name: shard2-mongo
     restart: always
     privileged: true
-    ports:
-      - 36385:27017
     command: -f /data/configdb/mongod.conf
-    networks:
-     default:
-       ipv4_address: 192.168.0.106
+    network_mode: "host"
     volumes:
       - ./main/conf/mongod.conf:/data/configdb/mongod.conf
-      - ./main/conf/mongo.keyfile:/data/configdb/mongo.keyfile
       - ./main/data/db:/data/db
 
   shard2-mongo-rep:
@@ -21,15 +16,10 @@ services:
     container_name: shard2-mongo-rep
     restart: always
     privileged: true
-    ports:
-      - 36386:27017
     command: -f /data/configdb/mongod.conf
-    networks:
-     default:
-       ipv4_address: 192.168.0.107
+    network_mode: "host"
     volumes:
       - ./rep/conf/mongod.conf:/data/configdb/mongod.conf
-      - ./rep/conf/mongo.keyfile:/data/configdb/mongo.keyfile
       - ./rep/data/db:/data/db
 
   shard2-mongo-rep1:
@@ -37,17 +27,8 @@ services:
     container_name: shard2-mongo-rep1
     restart: always
     privileged: true
-    ports:
-      - 36387:27017
     command: -f /data/configdb/mongod.conf
-    networks:
-     default:
-       ipv4_address: 192.168.0.108
+    network_mode: "host"
     volumes:
       - ./rep1/conf/mongod.conf:/data/configdb/mongod.conf
-      - ./rep1/conf/mongo.keyfile:/data/configdb/mongo.keyfile
       - ./rep1/data/db:/data/db
-networks:
-  default:
-    name: net
-    external: true
